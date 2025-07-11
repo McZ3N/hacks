@@ -2,7 +2,7 @@
 description: Taking over a computer object and performing a S4U attack
 ---
 
-# Resource Based Constrained Delegation
+# RBCD
 
 Resource Based Constrained Delegation can be exploited by adding a fake computer $FAKE-COMP01 to the domain, configuring it to act on behalf of the DC. This lets us request Kerberos tickets as $FAKE-COMP01 impersonating a domain admin. We then use Pass-the-Ticket to authenticate as admin and take over the domain by performing a S4U attack.
 
