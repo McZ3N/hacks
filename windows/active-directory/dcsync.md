@@ -17,8 +17,6 @@ To perfrom this attack you need the rights:
 * Replicating Directory Changes
 * Replciating Directory Changes all
 
-<figure><img src="broken-reference" alt=""><figcaption><p>Its commond to find these right enabled.</p></figcaption></figure>
-
 #### Use powershell to check for Replication rights
 
 First retrieve the user's SID and then use Get-ObjectAcl to check or Replication rights
