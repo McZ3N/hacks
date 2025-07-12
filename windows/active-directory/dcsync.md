@@ -23,7 +23,7 @@ To perfrom this attack you need the rights:
 
 First retrieve the user's SID and then use Get-ObjectAcl to check or Replication rights
 
-```shell
+```bash
 Get-DomainUser -Identity mczen  |select samaccountname,objectsid,memberof,useraccountcontrol |fl
 $sid= "S-1-5-21-3842939050-3880317879-2865463114-1164"
 Get-ObjectAcl "DC=zencorp,DC=local" -ResolveGUIDs | ? { ($_.ObjectAceType -match 'Replication-Get')} | ?{$_.SecurityIdentifier -match $sid} |select AceQualifier, ObjectDN, ActiveDirectoryRights,SecurityIdentifier,ObjectAceType | fl
