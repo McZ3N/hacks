@@ -4,7 +4,7 @@ description: Shadow credentials | AS-REQ | AS-REP | Account takeover
 
 # Shadow Credentials
 
-The Kerberpos authentication protocol works with tickets, like an TGS can be obtained by presenting a TGT. That prior TGT can be obtained by validing a first step "pre-authentication", when this is removed from an account it vulnerable for ASREProast. Validatino for pre-authentication works symmetricallyl or (with a DES, RC4, AES128 or AES256 key) or asymmetrically (with certificates).
+The Kerberpos authentication protocol works with tickets, like an TGS can be obtained by presenting a TGT.  That prior TGT can be obtained by validing a first step "pre-authentication", when this is removed from an account it vulnerable for ASREProast. Validatino for pre-authentication works symmetricallyl or (with a DES, RC4, AES128 or AES256 key) or asymmetrically (with certificates).&#x20;
 
 The asymmetrical way of pre-authenticating, working with certificates is called PKINIT.
 
@@ -14,7 +14,7 @@ It is possible to add “Key Credentials” to the attribute **msDS-KeyCredentia
 
 ### <mark style="color:yellow;">PKINIT</mark>
 
-In Kerberos authentication clients must perform "pre-authentication" before the KDC provides a TGT which can be used for Service Tickets. Without pre-authentication anyone could obtain the key with a password like in AS-REP Roasting.
+In Kerberos authentication clients must perform "pre-authentication" before the KDC provides a TGT  which can be used for Service Tickets. Without pre-authentication anyone could obtain the key with a password like in AS-REP Roasting.
 
 The pre-authentication works with a timestamp to prevent replay attacks. Most used is the symmetric key and less common asymmetric key approach which works with a public-private key pair. It encrypts pre-authentication data with private key, and the KDC decrypts it with the public key. The KDC has the keys as well allowing for exchange session key.
 
@@ -39,7 +39,7 @@ python3 pywhisker.py -d "domain.local" -u "user1" -p "complexpassword" --target 
 
 ### <mark style="color:yellow;">Shadow credential attack</mark>
 
-Example attack using DACL abuse and retrieving hash. In this scenario we have WriteOwner over user1 and GenericAll over user2.
+Example attack using DACL abuse and retrieving hash. In this scenario we have WriteOwner over user1 and GenericAll over user2.&#x20;
 
 ```bash
 # Enable Addmembers
@@ -107,3 +107,4 @@ certipy auth -pfx 3MvYN5a2.pfx -dc-ip 10.129.252.63 -username management_svc -do
 ```
 
 </details>
+

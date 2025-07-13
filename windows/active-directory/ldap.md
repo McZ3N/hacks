@@ -10,14 +10,14 @@ Lightweight Directory Access Protocol (LDAP) is an integral part of Active Direc
 
 LDAP is the language that applications use to communicate with services like Active Directory and with other server that provide directory services as well. LDAP lets systems in the network talk with the AD.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 ### <mark style="color:yellow;">AD LDAP Authentication</mark>
 
 There are 2 types of LDAP authentication:
 
-1. **Simple authentication** including anonymous authentication, unauthenticated authentication, and username/password authentication. It will create a BIND request to LDAP server.
-2. **SASL authentication**. SASL using authentication services like Kerberos to bind to the LDAP server. The LDAP protocol sends LDAP message which starts challenge and response messages.
+1. **Simple authentication** including anonymous authentication, unauthenticated authentication, and username/password authentication.  It will create a BIND request to LDAP server.
+2. **SASL authentication**. SASL using authentication services like Kerberos to bind to the LDAP server. The LDAP protocol sends LDAP message which starts challenge and response messages.&#x20;
 
 {% hint style="info" %}
 LDAP authentication messages are sent in cleartext.
@@ -25,7 +25,7 @@ LDAP authentication messages are sent in cleartext.
 
 ### <mark style="color:yellow;">LDAP queries</mark>
 
-Communicating with directory services using LDAP is done with queries.
+Communicating with directory services using LDAP is done with queries.&#x20;
 
 | Query                                         | Result                             |
 | --------------------------------------------- | ---------------------------------- |
@@ -59,9 +59,9 @@ PS C:\Users\mczen> (Get-ADGroup -Filter *).Count
 
 ## Powershell Filters
 
-Filters in PowerShell allows us to get better output and retreive data we are looking for. It can be used to narrow down specific data in large result.
+Filters in PowerShell allows us to get better output and retreive data we are looking for. It can be used to narrow down specific data in large result.&#x20;
 
-This would filter out all Microsoft software making the list of search results a lot smaller.
+This would filter out all Microsoft software making the list of search results a lot smaller.&#x20;
 
 ```powershell
 PS C:\zen> get-ciminstance win32_product -Filter "NOT Vendor like '%Microsoft%'" | fl
@@ -128,7 +128,7 @@ Get-ADComputer WS01 -Properties OperatingSystem, LastLogonDate, Description
 
 The `-LDAPFilter` enables us to use LDAP search filters which syntax is defined here: [https://datatracker.ietf.org/doc/html/rfc4515](https://datatracker.ietf.org/doc/html/rfc4515)
 
-LDAP filters must have 1 or more criteria, when using more we use AND or OR to concatenate.
+LDAP filters must have 1 or more criteria, when using more we use AND or OR to concatenate.&#x20;
 
 | Operator | Function |
 | -------- | -------- |
@@ -138,7 +138,7 @@ LDAP filters must have 1 or more criteria, when using more we use AND or OR to c
 
 ### <mark style="color:yellow;">Search criteria</mark>
 
-When using an LDAP search filter we need to specifiy rules, like `(displayName=mczen)`.
+When using an LDAP search filter we need to specifiy rules, like `(displayName=mczen)`.&#x20;
 
 <table><thead><tr><th width="156">Critera</th><th width="175">Rule</th><th>Example</th></tr></thead><tbody><tr><td>Equal to</td><td>(attribute=123)</td><td>(&#x26;(objectclass=user)(displayName=Smith)</td></tr><tr><td>Not equal to</td><td>(!(attribute=123))</td><td>!objectClass=group)</td></tr><tr><td>Present</td><td>(attribute=*)</td><td>(department=*)</td></tr></tbody></table>
 
@@ -210,7 +210,7 @@ Get-ADUser -Identity harry.jones -Properties * | select memberof | ft -Wrap
 
 ### <mark style="color:yellow;">SearchBase and SearchScope Parameters</mark>
 
-`SearchScope` allows us to define how deep into the OU hierarchy we would like to search. This parameter has three levels:
+`SearchScope` allows us to define how deep into the OU hierarchy we would like to search. This parameter has three levels:&#x20;
 
 <table data-header-hidden><thead><tr><th width="138">Name</th><th width="96">Level</th><th>Description</th></tr></thead><tbody><tr><td>Base</td><td>0</td><td>The object is specified as the <code>SearchBase</code>. Base scope only looks at the OU itself, not at users within.</td></tr><tr><td>OneLevel</td><td>1</td><td>Searches for objects in the container defined by the <code>SearchBase</code> but not in any sub-containers. Or 1 level deep.</td></tr><tr><td>SubTree</td><td>2</td><td>Entire subtree, including all levels of sub-containers and their children. Recursively all the way down the AD hierarchy.</td></tr></tbody></table>
 
@@ -279,7 +279,7 @@ Get-WmiObject -Class win32_group -Filter "Domain='INLANEFREIGHT'" | Select Capti
 
 ## LDAP Anonymous Bind
 
-LDAP anonymous binds allow unauthenticated attackers to retrieve information from the domain, this can be used to list users, groups, computers, account attributes and password policies.
+LDAP anonymous binds allow unauthenticated attackers to retrieve information from the domain, this can be used to list users, groups, computers, account attributes and password policies.&#x20;
 
 {% hint style="info" %}
 A anonymous bind is a request where the username and password fields are left empty.
@@ -301,7 +301,7 @@ True
 
 ### <mark style="color:yellow;">Ldapsearch</mark>
 
-We can use tools suchas windapsearch and ldapsearch to enumerate a domain.
+We can use tools suchas windapsearch and ldapsearch to enumerate a domain.&#x20;
 
 ```bash
 # ldapsearch
@@ -335,7 +335,7 @@ python3 windapsearch.py --dc-ip 10.129.42.188 -u "" -U --unconstrained-users
 
 ## Credentialed Enumeration
 
-When having domain credentials we get retrieve all kinds for information from LDAP.
+When having domain credentials we get retrieve all kinds for information from LDAP.&#x20;
 
 ```bash
 python3 windapsearch.py --dc-ip 10.129.1.207 -u zencorpo\\john.doe --da
@@ -360,7 +360,7 @@ python3 ldapsearch-ad.py -l 10.129.1.207 -d zencorp -u john.doe -p pass123 -t ke
 python3 ldapsearch-ad.py -l 10.129.1.207 -d zencorp -u john.doe -p pass123 -t asreproast
 ```
 
-If we want to find users with `smartcard_required` attribute set we can use the LDAP filter `(userAccountControl:1.2.840.113556.1.4.803:=262144)`.
+If we want to find users with `smartcard_required` attribute set we can use the LDAP filter `(userAccountControl:1.2.840.113556.1.4.803:=262144)`.&#x20;
 
 ```bash
 python3 ldapsearch-ad.py -l 10.129.42.188 -d zencorp -u john doe -p pass123 -t search -s "(userAccountControl:1.2.840.113556.1.4.803:=262144)"
@@ -371,4 +371,4 @@ python3 ldapsearch-ad.py -l 10.129.42.188 -d zencorp -u john doe -p pass123 -t s
 * `:=`: **bitwise AND** operation
 * `262144`: corresponds to the **SMARTCARD\_REQUIRED** flag
 
-<figure><img src="broken-reference" alt=""><figcaption><p>Properties <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/useraccountcontrol-manipulate-account-properties">here</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption><p>Properties <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/useraccountcontrol-manipulate-account-properties">here</a></p></figcaption></figure>
