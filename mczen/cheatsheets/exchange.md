@@ -6,7 +6,7 @@ To enumerate the version of Microsoft Exchange
 curl https://10.129.132.217/ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application -k | xmllint --format - | grep version 
 ```
 
-### <mark style="color:yellow;">Exporting username list</mark>
+### Exporting username lists
 
 If we already have access to a computer within the domain or an email. [https://github.com/pigeonburger/global-address-list-owa](https://github.com/pigeonburger/global-address-list-owa)
 
