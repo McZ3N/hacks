@@ -2,7 +2,7 @@
 
 #### Data collection
 
-```shell
+```bash
 # Get all
 SharpHound.exe -All
 
@@ -59,7 +59,7 @@ bloodhound-python -d zencorp.local -c DCOnly -u zen -p zen123 -ns 10.129.204.111
 
 #### Queries
 
-```shell
+```bash
 # Search user
 MATCH (u:User {name:"JOE@ZENCORP.LOCAL"}) RETURN u
 MATCH (u:User) WHERE u.name = "JOE@ZENCORP.LOCAL" RETURN u
@@ -111,7 +111,7 @@ MATCH p=((n)-[r:WriteSPN]->(m)) RETURN p
 
 #### ForceChangePassword
 
-```powershell
+```bash
 # Use powerview
 Import-Module .\PowerView.ps1
 
