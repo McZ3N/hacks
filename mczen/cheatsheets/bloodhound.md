@@ -59,7 +59,7 @@ bloodhound-python -d zencorp.local -c DCOnly -u zen -p zen123 -ns 10.129.204.111
 
 #### Queries
 
-```powershell
+```shell
 # Search user
 MATCH (u:User {name:"JOE@ZENCORP.LOCAL"}) RETURN u
 MATCH (u:User) WHERE u.name = "JOE@ZENCORP.LOCAL" RETURN u
