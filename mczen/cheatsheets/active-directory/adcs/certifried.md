@@ -16,7 +16,7 @@ This vulnerability is based manipulating **certificate mapping** when creating a
 
 Check if CA is patched
 
-```sh
+```bash
 certipy req -u 'BlWasp@lab.local' -p 'Password123!' -ca lab-LAB-DC-CA -dc-ip 10.129.228.237 -template User
 ```
 
