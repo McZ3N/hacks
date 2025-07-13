@@ -2,7 +2,7 @@
 
 #### Data collection
 
-```bash
+```shell
 # Get all
 SharpHound.exe -All
 
