@@ -2,7 +2,7 @@
 
 #### Data collection
 
-```powershell
+```bash
 # Get all
 SharpHound.exe -All
 
