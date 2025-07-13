@@ -24,7 +24,7 @@ DPAPI uses symmetric keys, or just 1 key instead of a keypair which is assymetri
 
 #### Where are DPAPI keys store?
 
-The master keys is stored in the following locatin. It uses the SID of a user which containts the keys needed to decrypt data for that user.
+The master keys is stored in the following locatin. It uses the SID of a user which containts the keys needed to decrypt data for that user.&#x20;
 
 ```powershell
 # Master keys
@@ -59,7 +59,7 @@ Adding entropy increases security by ensuring that only the specific user or app
 
 #### Process
 
-1. DPAPI generates user key based on password
+1. DPAPI generates user key based on password&#x20;
 2. DPAPI generates random master key and encrypts it with user key.
 3. CryptProtecData is called to create session key which is derived from master key.
 4. Password is ecnrypted with session key which encrypts the data.
@@ -109,3 +109,4 @@ Then decrypt credentials using the masterkey
 ```powershell
 dpapi.py credential -file "/home/kali/C4BB96844A5C9DD45D5B6A9859252BA6" -key 0xf8901b2125dd10209da9f66562df2e68e89a48cd0278b48a37f510df01418e68b283c61707f3935662443d81c0d352f1bc8055523bf65b2d763191ecd44e525a
 ```
+

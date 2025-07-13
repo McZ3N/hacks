@@ -2,7 +2,7 @@
 description: >-
   BloodHound uses graph theory to reveal the hidden and unintended relationships
   within an AD.
-cover: broken-reference
+cover: ../../.gitbook/assets/example-path.png
 coverY: 0
 ---
 
@@ -12,9 +12,9 @@ coverY: 0
 
 BloodHound is a powerful tool which everages graph theory to uncover hidden connections within Active Directory. This enables both attackers and defenders to visualize complex attack paths that might otherwise go unnoticed.
 
-Bloodhound will show you the rights users have over others and this way show you a path for lateral movement. Bloodhound will also tell you what abuse is possible and provide the command to achieve this.
+Bloodhound will show you the rights users have over others and this way show you a path for lateral movement. Bloodhound will also tell you what abuse is possible and provide the command to achieve this.&#x20;
 
-#### Extracting information with Sharphound
+#### Extracting  information with Sharphound
 
 To get all the data we need to import in Bloodhound we can use Sharphound. This will create a .zip file with within .json files which can be importinto Bloodhound.
 
@@ -72,13 +72,13 @@ bloodhound
 
 Upload the JSON files
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
 
-In this case we had credentials of Oliva user so we are starting there to see what rights she has. In the left pane search for Oliva and select it when the result is returned. First thing to check is OUTBOUND OBJECT CONTROL because this will identify potential lateral movement.
+In this case we had credentials of Oliva user so we are starting there to see what rights she has. In the left pane search for Oliva and select it when the result is returned.  First thing to check is OUTBOUND OBJECT CONTROL because this will identify potential lateral movement.
 
 Clicking on Transitive Object Control shows Olivia has GenericAll over Michael and Michael has ForceChangePassword over Benjamin.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
 
 #### GenericallAll
 
@@ -98,7 +98,7 @@ $UserPassword = ConvertTo-SecureString 'Password123!' -AsPlainText -Force
 Set-DomainUserPassword -Identity michael -AccountPassword $UserPassword -Credential $Cred
 ```
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
 #### Custom queries
 
@@ -108,4 +108,8 @@ Queries will help you find interesting users and important things in Bloodhound.
 curl -o ~/.config/bloodhound/customqueries.json "https://raw.githubusercontent.com/CompassSecurity/BloodHoundQueries/master/BloodHound_Custom_Queries/customqueries.json"
 ```
 
-\=\\
+\=\
+
+
+
+

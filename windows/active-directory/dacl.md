@@ -8,7 +8,7 @@ A discretionary access control list (DACL) identifies the trustees that are allo
 
 {% embed url="https://www.youtube.com/watch?ab_channel=NetworkEncyclopedia&v=Vo4u_5c7gG0" %}
 
-ACE's or access control entries describe allowed and denied permssions for a principal, where a principal is an entity which can be authenticated by a system or network like users, computer accounts, services, groups and processes against a securable object (user, group, computer, container, organizational unit (OU), GPO.
+ACE's or access control entries describe allowed and denied permssions for a principal, where a principal is an entity which can be authenticated by a system or network like users, computer accounts, services, groups and processes against a securable object (user, group, computer, container, organizational unit (OU), GPO.&#x20;
 
 The four general categories of access control policies are
 
@@ -56,12 +56,12 @@ An **ACE** includes a set of user rights and a Security Identifier (SID) that sp
 
 In a DACL there can be 9 types of ACEs but there are four main types of `ACEs` which are important to understand.
 
-| ACE                                                                                                                          | Description                                                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ACCESS\_ALLOWED\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_allowed_ace)                | Allows security principal to access AD object such as user account/group. It specifies read, write or modify.                                         |
-| [ACCESS\_ALLOWED\_OBJECT\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_allowed_object_ace) | Grants access the object itself and any child objects it contain. Grants security principal access to object and child objects.                       |
-| [ACCESS\_DENIED\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_denied_ace)                  | Denies a security principal access to an AD object, like a user or group. It cannot read, write or modify that object.                                |
-| [ACCESS\_DENIED\_OBJECT\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_denied_object_ace)   | Applied to object and restricts access to that object and child objects. It prevents a security principal from accessing an object and child objects. |
+| ACE                                                                                                                          | Description                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [ACCESS\_ALLOWED\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_allowed_ace)                | Allows security principal to access AD object such as user account/group. It specifies read, write or modify.                                          |
+| [ACCESS\_ALLOWED\_OBJECT\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_allowed_object_ace) | Grants access the object itself and any child objects it contain. Grants security principal access to object and child objects.                        |
+| [ACCESS\_DENIED\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_denied_ace)                  | Denies a security principal access to an AD object, like a user or group. It cannot read, write or modify that object.                                 |
+| [ACCESS\_DENIED\_OBJECT\_ACE](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-access_denied_object_ace)   | Applied to object and restricts access to that object and child objects. It prevents a security principal from accessing an object and child objects.  |
 
 An ace is made of four components:
 
@@ -83,7 +83,7 @@ We can use ACE entries for furthers acces. We can use bloodhound to enumerate th
 
 ### <mark style="color:yellow;">Logon Scripts</mark>
 
-Administrators use logon scripts to automate tasks or configurations when logging into the domain. Things like mapping/unmapping network drives, auditing and reporting, gathering information and enviromen customization.
+Administrators use logon scripts to automate tasks or configurations when logging into the domain. Things like mapping/unmapping network drives, auditing and reporting, gathering information and enviromen customization.&#x20;
 
 {% hint style="info" %}
 Windows stores `logon scripts` in the `scripts` folder within the `SYSVOL` network share or at: %systemroot%\SYSVOL\sysvol. SYSVOL also stores domain policies and GPOs.
@@ -107,5 +107,8 @@ SPN jacking uses WriteSPN rights to remove the service/serverA from serverA and 
 Ghost SPN-Jacking targets scenarios where an SPN, previously associated with a computer or service account, is either no longer in use, the're called Orphaned SPNs.
 
 \
-Live SPN-Jacking requires active manipulation of SPNs in use of the network.
+Live SPN-Jacking requires active manipulation of SPNs in use of the network.&#x20;
 {% endhint %}
+
+
+

@@ -39,7 +39,7 @@ Certificates can extend Kerberos authentication using PKINIT (Public Key Cryptog
 `Public Key Infrastructure (PKI)` is a system that uses digital certificates and public key cryptography. This is done to provide secure communication over unsecured network like the internet. PKI enables signatures, ecnryption and authentication of documents, email.
 
 {% hint style="info" %}
-A certificate is a document that binds a public key to a person, organization, device or service. It is issued and signed by a trusted Certificate Authority (CA). The CS verifies identity of certificate holder and integrity of public key.
+A certificate is a document that binds a public key to a person, organization, device or service. It is issued and signed by a trusted Certificate Authority (CA). The CS verifies identity of certificate holder and integrity of public key.&#x20;
 {% endhint %}
 
 The certificate includes:
@@ -51,7 +51,7 @@ The certificate includes:
 
 ### <mark style="color:yellow;">What is ADCS?</mark>
 
-`Active Directory Certificate Services (AD CS)` is a Windows server role that enables organizations to establish and manage their own Public Key Infrastructure (PKI). It is used to secure network services like SSL/TLS, VPN, Remote Desktop Services, WLAN.
+`Active Directory Certificate Services (AD CS)` is a Windows server role that enables organizations to establish and manage their own Public Key Infrastructure (PKI). It is used to secure network services like SSL/TLS, VPN, Remote Desktop Services, WLAN.&#x20;
 
 Active Directory Certificate Services includes:
 
@@ -67,7 +67,7 @@ Active Directory Certificate Services includes:
 
 ### <mark style="color:yellow;">ADCS Terminology</mark>
 
-ADCS serves as a pivotal player working with trust and encryption and at its core lies the Ceritifcate Authority (CA).
+ADCS serves as a pivotal player working with trust and encryption and at its core lies the Ceritifcate Authority (CA).&#x20;
 
 <details>
 
@@ -91,7 +91,7 @@ ADCS serves as a pivotal player working with trust and encryption and at its cor
 
 * `Backup Operator`: A backup operator is responsible for backing up and restoring files and directories. They are assigned through Active Directory Users and Computers or Computer Management. Their tasks include backing up and restoring the system state (including CA information), starting and stopping the AD CS service, using the system backup user right, and accessing records and configuration details in the CA database.
 
-- `Standalone CA & Enterprise CA`: `Standalone CAs` Standalone CAs work independently of Active Directory, handling manual or web-based certificate requests. Enterprise CAs, integrated with Active Directory, issue certificates to users, devices, and servers within an organization, automating processes through Group Policy or Certificate Enrollment Web Services.
+- `Standalone CA & Enterprise CA`: `Standalone CAs` Standalone CAs work independently of Active Directory, handling manual or web-based certificate requests. Enterprise CAs, integrated with Active Directory, issue certificates to users, devices, and servers within an organization, automating processes through Group Policy or Certificate Enrollment Web Services.&#x20;
 
 * `Certificate Signing Requests`: `Certificate Signing Requests (CSRs)` are requests sent by users or devices to an ADCS CA to get a certificate. A CSR includes the public key and identifying details like the subject name and intended use of the certificate. The CA verifies the requester's identity and checks the CSR for validity. If approved, the CA issues a digital certificate linking the public key to the requester's identity and intended purpose.
 
@@ -141,37 +141,37 @@ EKUs are represented by unique identifiers called **Object Identifiers (OIDs)**,
 
 {% stepper %}
 {% step %}
-**Find an Enterprise CA**
+#### Find an Enterprise CA
 
 Client finds an Enterprise CA. Based on objects in enrollment services container.
 {% endstep %}
 
 {% step %}
-**Generate a public-private key pair and create a CSR**
+#### Generate a public-private key pair and create a CSR
 
 Client generates a public-private key par, CSR message or certificate signing request.
 {% endstep %}
 
 {% step %}
-**Sign the CSR with private key and send to Enterprise CA server**
+#### Sign the CSR with private key and send to Enterprise CA server
 
 Clients signs CRS with private key and sends it to CA server.
 {% endstep %}
 
 {% step %}
-**CA check if the client is authorized to request certificates**
+#### CA check if the client is authorized to request certificates
 
 CA server check if client is authorized to request certificates. CA check if certificate template AD objects permissions allow it to obtain a certificate.
 {% endstep %}
 
 {% step %}
-**CA generate the certificate, sign it and if allowed, send it to the client**
+#### CA generate the certificate, sign it and if allowed, send it to the client
 
-CA generates a certificate with settings defined by the certificate template like the EKUs.
+CA generates a certificate with settings defined by the certificate template like the EKUs.&#x20;
 {% endstep %}
 
 {% step %}
-**The Client Receive the certificate:**
+#### The Client Receive the certificate:
 
 Client stores certifcate in Windows Certificate store to use EKU.
 {% endstep %}
@@ -183,7 +183,7 @@ When Active Directory Certificate Services (AD CS) is present and doing a securi
 
 ### <mark style="color:yellow;">Enumeration From Windows</mark>
 
-On factor indicating ADCS is present is the built-in Cert Publishers group which authorizes Certificate Authorities to publish certificates to the directory indicating a ADCS server.
+On factor indicating ADCS is present is the built-in Cert Publishers group which authorizes Certificate Authorities to publish certificates to the directory indicating a ADCS server.&#x20;
 
 ```powershell
 # Query Cert Publishers group
