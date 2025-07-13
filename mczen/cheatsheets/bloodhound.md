@@ -20,7 +20,7 @@ SharpHound.exe --memcache --outputdirectory \\10.10.11.10\share\ --zippassword Z
 SharpHound.exe -All --ldappassword zenpass --ldapusername zen
 ```
 
-#### Other usefull flags
+#### Other usefull flags test
 
 | Flag                | Description               |
 | ------------------- | ------------------------- |
