@@ -4,7 +4,7 @@
 
 ------
 
-This vulnerability is based manipulating **certificate mapping** when creating a computer account. Certificate mapping relied on `dNSHostName` attribute of a computer account. So when a computer requested a certificate, it trusted that `dNSHostName` as its identity.
+This vulnerability is based manipulating **certificate mapping** when creating a computer account. Certificate mapping relied on `dNSHostName` attribute of a computer account. So when a computer requested a certificate, it trusted that `dNSHostName` as its identity.  
 
 **Exploit by**
 
